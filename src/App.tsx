@@ -1,5 +1,5 @@
 // src/App.tsx
-import { Suspense, useCallback } from "react";
+import React, { Suspense, useCallback } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/infrastructure/store/hooks";
 import {
@@ -12,7 +12,6 @@ import {
 import { ChatInput } from "@/shared/layout/ChatInput";
 import { Header } from "@/shared/layout/Header";
 import { MainLayout } from "@/shared/layout/MainLayout";
-import Chat from "@/ui/Chat/Chat";
 import { EmptyState } from "@/ui/Chat/components/EmptyState.tsx";
 
 function App() {
@@ -35,7 +34,7 @@ function App() {
     },
     [dispatch],
   );
-
+  const Chat = React.lazy(() => import("@/ui/Chat/Chat"));
   const chatContent =
     messages.length === 0 ? (
       <EmptyState />
